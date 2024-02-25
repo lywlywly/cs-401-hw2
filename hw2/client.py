@@ -34,8 +34,14 @@ def _run(tracks, ip, port):
         "Content-Type": "application/json"
     }
 
-    response = requests.post(url, data=json_payload, headers=headers)
-    logging.info(f"Response: {response}")
+    while True:
+        try:
+            response = requests.post(url, data=json_payload, headers=headers)
+            logging.info(f"Response: {response}")
+            break
+        except Exception as e:
+            logging.error(f"Request failed: {e}")
+
     try:
         response_json = json.loads(response.text)
         print(f"Code version: {response_json['version']}")
