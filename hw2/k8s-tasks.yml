@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - name: rest-server-container-lw337
-        image: rallegro/cs-401-server:0.5
+        image: rallegro/cs-401-server:0.6
         ports:
         - containerPort: 5000
         volumeMounts:
