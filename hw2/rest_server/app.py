@@ -16,7 +16,7 @@ def hello_world():
         info = json.load(file)
     result = {
         "songs": list(recommendation),
-        "version": "1.0",
+        "version": "2.0",
         "model_date": info["date"],
         "dataset": info["file_name"],
     }
