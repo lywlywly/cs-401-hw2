@@ -35,16 +35,19 @@ def _run(tracks, ip, port):
     }
 
     response = requests.post(url, data=json_payload, headers=headers)
-
-    response_json = json.loads(response.text)
-    print(f"Code version: {response_json['version']}")
-    logging.info(f"Code version: {response_json['version']}")
-    print(f"Model time: {response_json['model_date']}")
-    logging.info(f"Model time: {response_json['model_date']}")
-    print(f"Dataset: {response_json['dataset']}")
-    logging.info(f"Dataset: {response_json['dataset']}")
-    print(f"Recommended songs: {response_json['songs']}")
-    logging.info(f"Recommended songs: {response_json['songs']}")
+    logging.info(f"Response: {response}")
+    try:
+        response_json = json.loads(response.text)
+        print(f"Code version: {response_json['version']}")
+        logging.info(f"Code version: {response_json['version']}")
+        print(f"Model time: {response_json['model_date']}")
+        logging.info(f"Model time: {response_json['model_date']}")
+        print(f"Dataset: {response_json['dataset']}")
+        logging.info(f"Dataset: {response_json['dataset']}")
+        print(f"Recommended songs: {response_json['songs']}")
+        logging.info(f"Recommended songs: {response_json['songs']}")
+    except:
+        logging.info(f"Failed to parse response json")
 
 def main():
     parser = argparse.ArgumentParser(description="Playlist recommendation.")
