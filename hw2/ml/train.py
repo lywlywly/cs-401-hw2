@@ -66,9 +66,9 @@ def run():
         pickle.dump(rules_dict, file)
     
 
-    with open(os.path.join(data_dir, "ml/rule.info"), "w") as file:
+    with open(os.path.join(data_dir, "ml/rule_info.json"), "w") as file:
         current_date = datetime.datetime.now()
-        info = {"date": str(current_date)}
+        info = {"date": str(current_date), "file_name": filename}
         print(current_date)
         json.dump(info, file)
 
