@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: ml-container-lw337
-        image: rallegro/cs-401:0.1
+        image: rallegro/cs-401:0.2
         volumeMounts:
         - mountPath: "/data"
           name: ml-data-mount-lw337
@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - name: rest-server-container-lw337
-        image: rallegro/cs-401-server:0.1
+        image: rallegro/cs-401-server:0.2
         ports:
         - containerPort: 5000
         volumeMounts:

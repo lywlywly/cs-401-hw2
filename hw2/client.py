@@ -19,6 +19,7 @@ def run(tracks, ip, port):
     response_json = json.loads(response.text)
     print(f"Code version: {response_json['version']}")
     print(f"Model time: {response_json['model_date']}")
+    print(f"Dataset: {response_json['dataset']}")
     print(f"Recommended songs: {response_json['songs']}")
 
 def main():
