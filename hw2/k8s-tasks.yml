@@ -13,7 +13,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ml-deployment-lw337-02
+  name: ml-deployment-lw337-03
   labels:
     app: ml-lw337
 spec:
@@ -36,7 +36,7 @@ spec:
         - name: DATA_DIR
           value: "/data"
         - name: DATASET_URL
-          value: "https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv"
+          value: "https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds2.csv"
       volumes:
       - name: ml-data-mount-lw337
         persistentVolumeClaim:
@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - name: rest-server-container-lw337
-        image: rallegro/cs-401-server:0.2
+        image: rallegro/cs-401-server:0.6
         ports:
         - containerPort: 5000
         volumeMounts:

@@ -34,24 +34,33 @@ def _run(tracks, ip, port):
         "Content-Type": "application/json"
     }
 
-    response = requests.post(url, data=json_payload, headers=headers)
+    while True:
+        try:
+            response = requests.post(url, data=json_payload, headers=headers)
+            logging.info(f"Response: {response}")
+            break
+        except Exception as e:
+            logging.error(f"Request failed: {e}")
 
-    response_json = json.loads(response.text)
-    print(f"Code version: {response_json['version']}")
-    logging.info(f"Code version: {response_json['version']}")
-    print(f"Model time: {response_json['model_date']}")
-    logging.info(f"Model time: {response_json['model_date']}")
-    print(f"Dataset: {response_json['dataset']}")
-    logging.info(f"Dataset: {response_json['dataset']}")
-    print(f"Recommended songs: {response_json['songs']}")
-    logging.info(f"Recommended songs: {response_json['songs']}")
+    try:
+        response_json = json.loads(response.text)
+        print(f"Code version: {response_json['version']}")
+        logging.info(f"Code version: {response_json['version']}")
+        print(f"Model time: {response_json['model_date']}")
+        logging.info(f"Model time: {response_json['model_date']}")
+        print(f"Dataset: {response_json['dataset']}")
+        logging.info(f"Dataset: {response_json['dataset']}")
+        print(f"Recommended songs: {response_json['songs']}")
+        logging.info(f"Recommended songs: {response_json['songs']}")
+    except:
+        logging.info(f"Failed to parse response json")
 
 def main():
     parser = argparse.ArgumentParser(description="Playlist recommendation.")
     parser.add_argument("-H", "--host", required=True, help="Host IP address.")
     parser.add_argument("-p", "--port", required=True, help="Port number.")
     parser.add_argument("-i", "--input", required=True, nargs="+", help="Input tracks.")
-    parser.add_argument("-c", "--continuous", action='store_true', default=False, help="Continuous send requests, save result in responses.txt.")
+    parser.add_argument("-c", "--continuous", action='store_true', default=False, help="Continuous send requests, save result in `log.log`.")
     args = parser.parse_args()
     tracks = args.input
     ip = args.host
