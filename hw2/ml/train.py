@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 import pickle
+import time
 
 import pandas as pd
 from fpgrowth_py import fpgrowth
@@ -10,14 +11,9 @@ import urllib.request
 import ssl
 
 
-dataset_url = os.environ.get(
-    "DATASET_URL",
-    "https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv",
-)
+dataset_url = os.environ.get("DATASET_URL", "https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv")
 data_dir = os.environ.get("DATA_DIR", "/data")
 filename = dataset_url.split("/")[-1]
-
-
 def download_file(url, destination_directory):
     try:
         ssl_context = ssl.create_default_context()
@@ -33,8 +29,7 @@ def download_file(url, destination_directory):
         print("Download success")
     except Exception as e:
         print(f"Error downloading: {e}")
-
-
+        
 def download_dataset():
     os.makedirs("/data/spotify", exist_ok=True)
     save_directory = "/data/spotify"
@@ -67,15 +62,17 @@ def run():
             rules_dict[key] = values
 
     os.makedirs("/data/ml", exist_ok=True)
-
     with open(os.path.join(data_dir, "ml/rule.pickle"), "wb") as file:
         pickle.dump(rules_dict, file)
+    
 
     with open(os.path.join(data_dir, "ml/rule.info"), "w") as file:
         current_date = datetime.datetime.now()
         info = {"date": str(current_date)}
+        print(current_date)
         json.dump(info, file)
 
+    time.sleep(60)
 
 def main():
     run()

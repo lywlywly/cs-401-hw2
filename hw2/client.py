@@ -4,11 +4,11 @@ import json
 import requests
 
 
-def run(tracks):
+def run(tracks, ip, port):
     payload = {"songs": tracks}
     json_payload = json.dumps(payload)
 
-    url = "http://127.0.0.1:52002/api/recommend"
+    url = f"http://{ip}:{port}/api/recommend"
 
     headers = {
         "Content-Type": "application/json"
@@ -23,10 +23,14 @@ def run(tracks):
 
 def main():
     parser = argparse.ArgumentParser(description="Playlist recommendation.")
+    parser.add_argument("-H", "--host", required=True, help="Host IP address.")
+    parser.add_argument("-p", "--port", required=True, help="Port number.")
     parser.add_argument("-i", "--input", required=True, nargs="+", help="Input tracks.")
     args = parser.parse_args()
     tracks = args.input
-    run(tracks)
+    ip = args.host
+    port = args.port
+    run(tracks, ip, port)
 
 
 main() if __name__ == "__main__" else None
