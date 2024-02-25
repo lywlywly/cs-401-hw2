@@ -17,7 +17,7 @@ metadata:
   labels:
     app: ml-lw337
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: ml-lw337
@@ -49,7 +49,7 @@ metadata:
   labels:
     app: server-lw337
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: server-lw337
