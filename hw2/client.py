@@ -51,7 +51,7 @@ def main():
     parser.add_argument("-H", "--host", required=True, help="Host IP address.")
     parser.add_argument("-p", "--port", required=True, help="Port number.")
     parser.add_argument("-i", "--input", required=True, nargs="+", help="Input tracks.")
-    parser.add_argument("-c", "--continuous", action='store_true', default=False, help="Continuous send requests, save result in responses.txt.")
+    parser.add_argument("-c", "--continuous", action='store_true', default=False, help="Continuous send requests, save result in `log.log`.")
     args = parser.parse_args()
     tracks = args.input
     ip = args.host
